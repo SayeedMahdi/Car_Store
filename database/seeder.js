@@ -4,7 +4,7 @@ const db = require('./database.js')
 //Create table Customers
 db.run(`
 CREATE TABLE customers (
-    id int primary key NOT NULL, 
+    id INTEGER PRIMARY KEY  AUTO_INCREMENT, 
     name varchar(100), 
     country varchar(100),
     dateOfBirth date,
@@ -15,11 +15,12 @@ CREATE TABLE customers (
 //Create table Vehicles
 db.run(`
 CREATE TABLE vehicles (
-    id int primary key NOT NULL ,
+    id INTEGER PRIMARY KEY  AUTO_INCREMENT,
     name varchar(100), manufacturer varchar(100),
     model varchar(100),
-    milage int  ,
-    price int 
+    mileage int  ,
+    price int ,
+    count  int
 );`
 );
 
