@@ -1,0 +1,24 @@
+{
+  "name": "car_store",
+  "version": "1.0.0",
+  "description": "An ",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "migration": "node ./database/seeder.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SayeedMahdi/Car_Store.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SayeedMahdi/Car_Store/issues"
+  },
+  "homepage": "https://github.com/SayeedMahdi/Car_Store#readme",
+  "dependencies": {
+    "nodemon": "^2.0.18",
+    "sqlite3": "^5.0.8"
+  }
+}
