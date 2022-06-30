@@ -1,7 +1,5 @@
-const db = require("../../database/database");
 const asyncHandler = require("express-async-handler");
-
-
+const db = require("../../database/database");
 //get all @api/v1/admin/vehicle
 const getVehicles = asyncHandler( (req, res) => {
     const selectQuery = `SELECT * FROM vehicles`;
@@ -14,8 +12,8 @@ const getVehicles = asyncHandler( (req, res) => {
     });
   });
 
-   //delete @api/v1/admin/vehicle
- const getVehicle = asyncHandler( (req, res) => {
+//delete @api/v1/admin/vehicle
+const getVehicle = asyncHandler( (req, res) => {
     const id = req.params.id;
     const querySelector = `SELECT * FROM vehicles WHERE id=?`;
     db.all(querySelector, id,(err,data) =>{
@@ -33,8 +31,7 @@ const getVehicles = asyncHandler( (req, res) => {
     });
   });
 
-  
- //delete @api/v1/admin/vehicle
+   //delete @api/v1/admin/vehicle
  const searchVehicle = asyncHandler( (req, res) => {
     const name = req.params.name;
     const querySelector = `SELECT * FROM vehicles WHERE name LIKE '%${name}%'`;
@@ -53,3 +50,9 @@ const getVehicles = asyncHandler( (req, res) => {
     });
   });
   
+
+  module.exports ={
+    getVehicle,
+    getVehicles,
+    searchVehicle
+  }
