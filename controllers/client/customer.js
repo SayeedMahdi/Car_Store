@@ -19,8 +19,8 @@ const singUp = asyncHandler( (req, res) => {
   });
 });
 
-//update @api/v1/admin/vehicle
-const editeUser = asyncHandler((req, res) => {
+//update @api/v1/clint/customer
+const editUser = asyncHandler((req, res) => {
     const id = req.params.id;
     const queryPortionArr = []
     const queryPortionValues = []
@@ -42,26 +42,9 @@ const editeUser = asyncHandler((req, res) => {
     });
   });
 
-  //delete @api/v1/admin/vehicle
-const deleteC = asyncHandler((req, res) => {
-    const id = req.params.id;
-    const querySelector = `DELETE FROM vehicles WHERE id=?`;
-    db.run(querySelector, id,(err) =>{
-        if(err){
-            res.status(404)
-            throw new Error(err);
-        }
-         // Success
-      res.status(200).json(id);
-    });
-  });
 
 
 module.exports = {
-  getVehicles,
-  getVehicle,
-  searchVehicle,
-  postVehicle,
-  updateVehicle,
-  deleteVehicle
+ singUp,
+ editUser
 };

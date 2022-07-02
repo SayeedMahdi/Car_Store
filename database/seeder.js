@@ -5,7 +5,7 @@ const db = require('./database.js')
 db.run(`
 CREATE TABLE customers (
     id INTEGER PRIMARY KEY  AUTOINCREMENT, 
-    name varchar(100), 
+    name varchar(100) , 
     country varchar(100),
     dateOfBirth date,
     age int 
