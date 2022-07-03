@@ -29,7 +29,10 @@ db.run(`
 CREATE TABLE customer_vehicles (
     customerId int, 
     vehicleId int,
+    count int,
+    buyDate TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (customerId) REFERENCES customers(id),
     FOREIGN KEY (vehicleId) REFERENCES vehicles(id)
+
 );`
 );

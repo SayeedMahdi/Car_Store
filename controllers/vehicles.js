@@ -1,4 +1,4 @@
-const db = require("../../database/database");
+const db = require("../database/database");
 const asyncHandler = require("express-async-handler");
 
 //get all @api/v1/admin/vehicle
@@ -19,7 +19,7 @@ const getVehicle =  (req, res) => {
   getVehicleWithId( res, id);
 };
 
-//delete @api/v1/admin/vehicle
+//delete @api/v1/admin/vehicle/search
 const searchVehicle = asyncHandler((req, res) => {
   const searchQuery = req.params.searchQuery;
   const querySelector = `SELECT * FROM vehicles WHERE name OR manufacturer OR model OR PRICE LIKE '%${searchQuery}%'`;
