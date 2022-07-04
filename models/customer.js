@@ -1,44 +1,47 @@
 const db = require("../database/database");
 
 class Customer {
-    constructor(options) {
-        if(typeof options === "object") {
-            this.name = options.name
+  constructor(options) {
+    console.log(options);
+    if (typeof options === "object") {
+      (this.name = options.name),
+        (this.age = options.age),
+        (this.country = options.country),
+        (this.phone = options.phone);
+    }
+  }
+
+  static async findById(id) {
+    const querySelector = `SELECT * FROM customers WHERE id=? limit 1`;
+    return new Promise((resolve, reject) => {
+      db.all(querySelector, id, (err, data) => {
+        if (err) return reject(err);
+        if (data.length > 0) {
+          return resolve(data[0]);
         }
-    }
+        return resolve([]);
+      });
+    });
+  }
 
+  static async getAll() {
+    return new Promise((resolve, reject) => {
+      db.all("SELECT * FROM customers", (err, data) => {
+        if (err) {
+          throw new Error(err);
+        }
+        resolve(data);
+      });
+    });
+  }
 
-    static async findById(id) {
-        const querySelector = `SELECT * FROM customers WHERE id=? limit 1`;
-        return new Promise((resolve, reject) => {
-            db.all(querySelector,id, (err, data) => {
-                if (err) return reject(err);
-                if (data.length > 0) {
-                    return resolve(data[0]);
-                }
-                return resolve([])
-            });
-        })
-    }
+  create() {}
 
-    static async getAll(){
-        return new Promise((resolve, reject) => {
-            db.all("SELECT * FROM customers", (err, data) => {
-                if (err) {
-                  throw new Error(err);
-                }
-                resolve(data);
-            });
-        });
-    }
+  save() {}
 
-    create() {}
+  update() {}
 
-    save() {}
-
-    update() {}
-
-    delete() {}
+  delete() {}
 }
 
-module.exports = Customer
+module.exports = Customer;

@@ -1,5 +1,4 @@
-const db = require('./database.js')
-
+const db = require("./database.js");
 
 //Create table Customers
 db.run(`
@@ -8,9 +7,8 @@ CREATE TABLE customers (
     name varchar(100) , 
     country varchar(100),
     dateOfBirth date,
-    age int unsigned
-);`
-);
+    age int 
+);`);
 
 //Create table Vehicles
 db.run(`
@@ -20,9 +18,8 @@ CREATE TABLE vehicles (
     model varchar(100),
     mileage int  ,
     price int ,
-    count  int unsigned
-);`
-);
+    count  int 
+);`);
 
 //Create table Sales
 db.run(`
@@ -34,5 +31,4 @@ CREATE TABLE customer_vehicles (
     FOREIGN KEY (customerId) REFERENCES customers(id),
     FOREIGN KEY (vehicleId) REFERENCES vehicles(id)
 
-);`
-);
+);`);
