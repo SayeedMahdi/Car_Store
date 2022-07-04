@@ -8,7 +8,7 @@ CREATE TABLE customers (
     name varchar(100) , 
     country varchar(100),
     dateOfBirth date,
-    age int 
+    age int unsigned
 );`
 );
 
@@ -20,7 +20,7 @@ CREATE TABLE vehicles (
     model varchar(100),
     mileage int  ,
     price int ,
-    count  int
+    count  int unsigned
 );`
 );
 
@@ -29,7 +29,7 @@ db.run(`
 CREATE TABLE customer_vehicles (
     customerId int, 
     vehicleId int,
-    count int,
+    count int NOT NULL UNSIGNED,
     buyDate TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (customerId) REFERENCES customers(id),
     FOREIGN KEY (vehicleId) REFERENCES vehicles(id)
