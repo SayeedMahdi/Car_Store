@@ -6,7 +6,7 @@ const {
   deleteVehicle,
   searchVehicle,
 } = require("./controllers/vehicles");
-
+const order = require();
 const {
   getCustomers,
   getCustomer,
@@ -32,4 +32,5 @@ router.route("/customer/:id").get(getCustomer).delete(deleteCustomer);
 router.route("/customer/search/:name").get(searchCustomer);
 
 router.route("/order").get(getSales).post(postCustomerVehicle);
+router.route("/order/:id").get(getUserOrders);
 module.exports = router;
