@@ -7,7 +7,8 @@ CREATE TABLE customers (
     name varchar(100) , 
     country varchar(100),
     dateOfBirth date,
-    age int 
+    age int ,
+    phone varchar(14)
 );`);
 
 //Create table Vehicles
@@ -26,7 +27,7 @@ db.run(`
 CREATE TABLE customer_vehicles (
     customerId int, 
     vehicleId int,
-    count int NOT NULL UNSIGNED,
+    count int NOT NULL ,
     buyDate TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (customerId) REFERENCES customers(id),
     FOREIGN KEY (vehicleId) REFERENCES vehicles(id)

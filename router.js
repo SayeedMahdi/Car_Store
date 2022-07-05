@@ -10,7 +10,9 @@ const {
 const {
   getCustomers,
   getCustomer,
+  searchCustomer,
   createCustomer,
+  deleteCustomer,
 } = require("./controllers/customer");
 
 const {
@@ -25,9 +27,9 @@ router.route("/vehicle/:id").get(getVehicle);
 // router.route("/vehicle/search/:name").get(searchVehicle);
 
 router.route("/customer").get(getCustomers).post(createCustomer);
-router.route("/customer/:id").get(getCustomer);
+router.route("/customer/:id").get(getCustomer).delete(deleteCustomer);
 // .put(updateCustomer).delete(deleteCustomer);
-// router.route("/customer/search/:name").get(searchCustomer);
+router.route("/customer/search/:name").get(searchCustomer);
 
 router.route("/order").get(getSales).post(postCustomerVehicle);
 module.exports = router;

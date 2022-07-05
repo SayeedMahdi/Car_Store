@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const {errorHandler}= require("./middleware/errorHandler");
+const {errorHandler, notFound} = require("./middleware/errorHandler");
 const cors = require("cors");
 
 require("dotenv").config();
@@ -10,7 +10,7 @@ const router = require("./router");
 app.use(cors({}));
 app.use(express.json());
 app.use("/api/v1/admin",router);
-
+app.use(notFound)
 app.use(errorHandler);
 
 
