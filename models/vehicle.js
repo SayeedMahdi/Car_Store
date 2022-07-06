@@ -7,14 +7,14 @@ class Vehicles {
         (this.model = options.model),
         (this.mileage = options.mileage),
         (this.price = options.price),
-        (this.count = options.count)
+        (this.count = options.count);
     }
   }
 
   static async findById(id) {
     const querySelector = `SELECT * FROM vehicles WHERE id=? limit 1`;
     return new Promise((resolve, reject) => {
-      db.all(querySelector, id, (err, data) => {
+      db.query(querySelector, id, (err, data) => {
         if (data.length > 0) {
           return resolve(data[0]);
         }
@@ -25,7 +25,7 @@ class Vehicles {
 
   static async getAll() {
     return new Promise((resolve, reject) => {
-      db.all("SELECT * FROM vehicles", (err, data) => {
+      db.query("SELECT * FROM vehicles", (err, data) => {
         if (err) {
           throw new Error(err);
         }
@@ -42,10 +42,10 @@ class Vehicles {
       this.model,
       this.mileage,
       this.price,
-      this.count
+      this.count,
     ];
     new Promise((resolve, reject) => {
-      db.run(qu, vehicle, (err) => {
+      db.query(qu, vehicle, (err) => {
         if (err) {
           reject(Error(err));
         }
@@ -56,7 +56,7 @@ class Vehicles {
   static async update(id, queryPortionStr, queryPortionValues) {
     const qu = `UPDATE vehicles SET ${queryPortionStr} WHERE id= ${id}`;
     new Promise((resolve, reject) => {
-      db.run(qu, queryPortionValues, (err) => {
+      db.query(qu, queryPortionValues, (err) => {
         if (err) {
           reject(Error(err));
         }
@@ -73,7 +73,7 @@ class Vehicles {
     const selectQuery = `SELECT * FROM vehicles WHERE name OR manufacturer OR model OR mileage OR price OR count
      LIKE '%${searchValue}%'`;
     return new Promise((resolve, reject) => {
-      db.all(selectQuery, (err, data) => {
+      db.query(selectQuery, (err, data) => {
         if (err) {
           throw new Error(err);
         }
@@ -85,7 +85,7 @@ class Vehicles {
   static async lastInserted() {
     const selectQuery = `SELECT * FROM vehicles ORDER BY ID DESC LIMIT 1`;
     return new Promise((resolve, reject) => {
-      db.all(selectQuery, (err, data) => {
+      db.query(selectQuery, (err, data) => {
         if (err) {
           throw new Error(err);
         }

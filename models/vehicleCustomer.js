@@ -1,4 +1,4 @@
-const db = require("../database/database")
+const db = require("../database/database");
 class CustomersVehicle {
   constructor(options) {
     if (typeof options === "object") {
@@ -32,20 +32,20 @@ class CustomersVehicle {
     customer_vehicles.count,customer_vehicles.buyDate FROM customers  
    INNER JOIN customer_vehicles ON customers.id = customer_vehicles.customerId   
    INNER JOIN vehicles ON vehicles.id = customer_vehicles.vehicleId ORDER BY CustomerName;`;
-   return new Promise((resolve, reject) => {
-    db.all(selectQuery, (err, data) => {
-      if (err) {
-        reject(err)
-      }
-      resolve(data);
+    return new Promise((resolve, reject) => {
+      db.query(selectQuery, (err, data) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(data);
+      });
     });
-  });
   }
 
   static async lastInserted() {
     const selectQuery = `SELECT * FROM customer_vehicles ORDER BY customerId DESC LIMIT 1`;
     return new Promise((resolve, reject) => {
-      db.all(selectQuery, (err, data) => {
+      db.query(selectQuery, (err, data) => {
         if (err) {
           throw new Error(err);
         }
@@ -61,15 +61,11 @@ class CustomersVehicle {
      INNER JOIN customer_vehicles ON customers.id = customer_vehicles.customerId   
      INNER JOIN vehicles ON vehicles.id = customer_vehicles.vehicleId  WHERE customers.id = ?`;
     return new Promise((resolve, reject) => {
-      db.all(selectQuery, customerId, (err, data) => {
-        
+      db.query(selectQuery, customerId, (err, data) => {
         return resolve(data);
       });
     });
   }
 }
- 
-
-
 
 module.exports = CustomersVehicle;
