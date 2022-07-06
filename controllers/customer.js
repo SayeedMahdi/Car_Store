@@ -19,7 +19,10 @@ const getCustomer = asyncHandler(async (req, res, next) => {
 
 const createCustomer = asyncHandler(async (req, res) => {
   const user = new Customer(req.body);
-  await user.save();
+  const err =await user.save();
+  if(err){
+    throw new Error(err);
+  }
   const lastUser = await Customer.lastInserted();
   return res.json(lastUser[0]);
 });

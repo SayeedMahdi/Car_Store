@@ -1,9 +1,9 @@
 const db = require("./database.js");
 
 //Create table Customers
-db.run(`
+db.query(`
 CREATE TABLE customers (
-    id INTEGER PRIMARY KEY  AUTOINCREMENT, 
+    id INTEGER PRIMARY KEY  AUTO_INCREMENT, 
     name varchar(100) , 
     country varchar(100),
     dateOfBirth date,
@@ -12,9 +12,9 @@ CREATE TABLE customers (
 );`);
 
 //Create table Vehicles
-db.run(`
+db.query(`
 CREATE TABLE vehicles (
-    id INTEGER PRIMARY KEY  AUTOINCREMENT,
+    id INTEGER PRIMARY KEY  AUTO_INCREMENT,
     name varchar(100), manufacturer varchar(100),
     model varchar(100),
     mileage int  ,
@@ -23,7 +23,7 @@ CREATE TABLE vehicles (
 );`);
 
 //Create table Sales
-db.run(`
+db.query(`
 CREATE TABLE customer_vehicles (
     customerId int, 
     vehicleId int,

@@ -14,7 +14,7 @@ class Customer {
   static async findById(id) {
     const querySelector = `SELECT * FROM customers WHERE id=? limit 1`;
     return new Promise((resolve, reject) => {
-      db.all(querySelector, id, (err, data) => {
+      db.query(querySelector, id, (err, data) => {
         if (data.length > 0) {
           return resolve(data[0]);
         }
@@ -25,7 +25,7 @@ class Customer {
 
   static async getAll() {
     return new Promise((resolve, reject) => {
-      db.all("SELECT * FROM customers", (err, data) => {
+      db.query("SELECT * FROM customers", (err, data) => {
         if (err) {
           throw new Error(err);
         }
@@ -35,7 +35,7 @@ class Customer {
   }
 
   async save() {
-    const qu = `INSERT INTO  customers ( name, country, age, dateOfBirth, phone ) VALUES ($1,$2,$3,$4,$5)`;
+    const qu = `INSERT INTO  customers ( name, country, age, dateOfBirth, phone ) VALUES (?,?,?,?,?)`;
     const customer = [
       this.name,
       this.country,
@@ -44,9 +44,9 @@ class Customer {
       this.phone,
     ];
     new Promise((resolve, reject) => {
-      db.run(qu, customer, (err) => {
+      db.query(qu, customer, (err) => {
         if (err) {
-          reject(Error(err));
+          reject(err);
         }
       });
     });
@@ -83,7 +83,7 @@ class Customer {
   static async lastInserted() {
     const selectQuery = `SELECT * FROM customers ORDER BY ID DESC LIMIT 1`;
     return new Promise((resolve, reject) => {
-      db.all(selectQuery, (err, data) => {
+      db.query(selectQuery, (err, data) => {
         if (err) {
           throw new Error(err);
         }
