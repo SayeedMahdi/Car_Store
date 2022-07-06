@@ -42,7 +42,6 @@ class CustomersVehicle {
   });
   }
 
-  getCustomerVehicles() {}
   static async lastInserted() {
     const selectQuery = `SELECT * FROM customer_vehicles ORDER BY customerId DESC LIMIT 1`;
     return new Promise((resolve, reject) => {
@@ -54,6 +53,23 @@ class CustomersVehicle {
       });
     });
   }
+
+  static async getCustomerVehicle(customerId) {
+    const selectQuery = `SELECT customers.name AS CustomerName, customers.country ,
+      vehicles.name As vehicleName ,vehicles.price * Customer_vehicles.count As Total_Price,
+      customer_vehicles.count,customer_vehicles.buyDate FROM customers  
+     INNER JOIN customer_vehicles ON customers.id = customer_vehicles.customerId   
+     INNER JOIN vehicles ON vehicles.id = customer_vehicles.vehicleId  WHERE customers.id = ?`;
+    return new Promise((resolve, reject) => {
+      db.all(selectQuery, customerId, (err, data) => {
+        
+        return resolve(data);
+      });
+    });
+  }
 }
  
+
+
+
 module.exports = CustomersVehicle;

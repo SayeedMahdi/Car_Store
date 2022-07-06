@@ -6,7 +6,6 @@ const {
   searchVehicle,
   createVehicle,
 } = require("./controllers/vehicles");
-const order = require();
 const {
   getCustomers,
   getCustomer,
@@ -19,6 +18,7 @@ const {
 const {
   postCustomerVehicle,
   getSales,
+  getUserOrders
 } = require("./controllers/customerVehicle");
 
 const router = require("express").Router();

@@ -1,4 +1,3 @@
-const db = require("../database/database");
 const asyncHandler = require("express-async-handler");
 const CustomersVehicles = require("../models/vehicleCustomer");
 const customer = require("../models/customer");
@@ -28,15 +27,16 @@ const postCustomerVehicle = asyncHandler(async(req, res) => {
 
 const getUserOrders = asyncHandler(async (req, res) => {
   const customerId = req.params.id;
-  const data = await Customer.findById(customerId);
-  if (data.length === 0) {
+  const isExist = await customer.findById(customerId);
+  if (isExist.length === 0) {
     throw new Error("User not Found!");
   }
-  customerVehicle.getCustomerVehicle(customerId);
+  const  data =await CustomersVehicles.getCustomerVehicle(customerId);
+  res.status(200).json(data);
 });
 
 module.exports = {
   postCustomerVehicle,
   getSales,
-  getUserOrders,
+  getUserOrders
 };
