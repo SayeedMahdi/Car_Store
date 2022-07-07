@@ -55,7 +55,7 @@ class Customer {
   static async update(id, queryPortionStr, queryPortionValues) {
     const qu = `UPDATE customers SET ${queryPortionStr} WHERE id= ${id}`;
     new Promise((resolve, reject) => {
-      db.run(qu, queryPortionValues, (err) => {
+      db.query(qu, queryPortionValues, (err) => {
         if (err) {
           reject(Error(err));
         }
@@ -65,13 +65,13 @@ class Customer {
 
   static async delete(id) {
     const querySelector = `DELETE FROM customers WHERE id=?`;
-    db.run(querySelector, id);
+    db.query(querySelector, id);
   }
 
   static async search(searchValue) {
     const selectQuery = `SELECT * FROM customers WHERE name OR age OR dateOfBirth OR country LIKE '%${searchValue}%'`;
     return new Promise((resolve, reject) => {
-      db.all(selectQuery, (err, data) => {
+      db.query(selectQuery, (err, data) => {
         if (err) {
           throw new Error(err);
         }

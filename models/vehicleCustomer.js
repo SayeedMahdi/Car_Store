@@ -9,16 +9,16 @@ class CustomersVehicle {
   }
 
   async save() {
-    const qu = `INSERT INTO  customer_vehicles ( customerId, vehicleId, count) VALUES ($1,$2,$3)`;
+    const qu = `INSERT INTO  customer_vehicles ( customerId, vehicleId, count) VALUES (?, ?, ?)`;
     const vehicle = [+this.customerId, this.vehicleId, +this.countOrder];
     new Promise((resolve, reject) => {
-      db.run(qu, vehicle, (err) => {
+      db.query(qu, vehicle, (err) => {
         if (err) {
           reject(Error(err));
         }
       });
       const query2 = `UPDATE vehicles SET count =count - ?  WHERE id= ${this.vehicleId}`;
-      db.run(query2, this.countOrder, (err) => {
+      db.query(query2, this.countOrder, (err) => {
         if (err) {
           throw new Error(err);
         }

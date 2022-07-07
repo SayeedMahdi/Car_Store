@@ -23,12 +23,12 @@ const db = require("./database.js");
 // );`);
 
 //Create table Sales
-db.query(`
-CREATE TABLE orders (
-    customerId INTEGER ,
-    vehicleId INTEGER,
-    count int NOT NULL,
-    buyDate TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (customerId) REFERENCES customers(id),
-    FOREIGN KEY (vehicleId) REFERENCES vehicles(id)
-);`);
+// db.query(`
+// CREATE TABLE orders (
+//     customerId INTEGER ,
+//     vehicleId INTEGER,
+//     count int NOT NULL,
+//     buyDate TIMESTAMP   DEFAULT CURRENT_TIMESTAMP,
+//     FOREIGN KEY (customerId) REFERENCES customers(id),
+//     FOREIGN KEY (vehicleId) REFERENCES vehicles(id)
+// );`);

@@ -21,7 +21,11 @@ const {
   getUserOrders
 } = require("./controllers/customerVehicle");
 
+
+
 const router = require("express").Router();
+
+router.route("/login").post()
 
 router.route("/vehicle").get(getVehicles).post(createVehicle);
 router.route("/vehicle/:id").get(getVehicle).put(updateVehicle).delete(deleteVehicle);

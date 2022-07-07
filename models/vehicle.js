@@ -35,7 +35,7 @@ class Vehicles {
   }
 
   async save() {
-    const qu = `INSERT INTO  vehicles ( name, manufacturer, model, mileage, price, count ) VALUES ($1,$2,$3,$4,$5,$6)`;
+    const qu = `INSERT INTO  vehicles ( name, manufacturer, model, mileage, price, count ) VALUES (?,?,?,?,?,?)`;
     const vehicle = [
       this.name,
       this.manufacturer,
@@ -66,12 +66,12 @@ class Vehicles {
 
   static async delete(id) {
     const querySelector = `DELETE FROM vehicles WHERE id=?`;
-    db.run(querySelector, id);
+    db.query(querySelector, id);
   }
 
   static async search(searchValue) {
     const selectQuery = `SELECT * FROM vehicles WHERE name OR manufacturer OR model OR mileage OR price OR count
-     LIKE '%${searchValue}%'`;
+     LIKE '%${searchValue}' `;
     return new Promise((resolve, reject) => {
       db.query(selectQuery, (err, data) => {
         if (err) {

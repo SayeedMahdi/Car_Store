@@ -37,7 +37,6 @@ const searchVehicle = asyncHandler(async (req, res) => {
 const updateVehicle = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const result = await Vehicles.findById(id);
-
   if (result.length === 0) {
     throw new Error("there is not Vehicle with ID!");
   }
@@ -60,6 +59,10 @@ const updateVehicle = asyncHandler(async (req, res) => {
 //delete @api/v1/admin/Vehicle/:id
 const deleteVehicle = asyncHandler(async (req, res) => {
   const id = req.params.id;
+  const result = await Vehicles.findById(id);
+  if (result.length === 0) {
+    throw new Error("there is not Vehicle with ID!");
+  }
   await Vehicles.delete(id);
   res.status(200).json("deleted");
 });

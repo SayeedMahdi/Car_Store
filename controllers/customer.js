@@ -7,7 +7,7 @@ const getCustomers = async (req, res) => {
   res.json(customers);
 };
 
-const getCustomer = asyncHandler(async (req, res, next) => {
+const getCustomer = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const customer = await Customer.findById(id);
   if (customer.length === 0) {
@@ -63,6 +63,10 @@ const updateCustomer = asyncHandler(async (req, res) => {
 //delete @api/v1/admin/customer/:id
 const deleteCustomer = asyncHandler(async (req, res) => {
   const id = req.params.id;
+  const isExist =await Customer.findById(id);
+  if(isExist.length === 0){
+    throw new Error("There is not Customer with that Id");
+  }
   await Customer.delete(id);
   res.status(200).json("deleted");
 });
