@@ -18,25 +18,36 @@ const {
 const {
   postCustomerVehicle,
   getSales,
-  getUserOrders
+  getUserOrders,
 } = require("./controllers/customerVehicle");
 
-const  {signUp,signIn}= require("./controllers/adminController");
-
+const { signUp, signIn } = require("./controllers/adminController");
+const auth = require("./middleware/auth");
 
 const router = require("express").Router();
 
 router.route("/signup").post(signUp);
 router.route("/signIn").post(signIn);
 
-router.route("/vehicle").get(getVehicles).post(createVehicle);
-router.route("/vehicle/:id").get(getVehicle).put(updateVehicle).delete(deleteVehicle);
-router.route("/vehicle/search/:name").get(searchVehicle);
+router.route("/vehicle").all(auth).get(getVehicles).post(createVehicle);
+router
+  .route("/vehicle/:id")
+  .all(auth)
+  .get(getVehicle)
+  .put(updateVehicle)
+  .delete(deleteVehicle);
+router.route("/vehicle/search/:name").all(auth).get(searchVehicle);
 
-router.route("/customer").get(getCustomers).post(createCustomer);
-router.route("/customer/:id").get(getCustomer).delete(deleteCustomer).put(updateCustomer);
-router.route("/customer/search/:name").get(searchCustomer);
+router.route("/customer").all(auth).get(getCustomers).post(createCustomer);
 
-router.route("/order").get(getSales).post(postCustomerVehicle);
-router.route("/order/:id").get(getUserOrders);
+router
+  .route("/customer/:id")
+  .all(auth)
+  .get(getCustomer)
+  .delete(deleteCustomer)
+  .put(updateCustomer);
+router.route("/customer/search/:name").all(auth).get(searchCustomer);
+
+router.route("/order").all(auth).get(getSales).post(postCustomerVehicle);
+router.route("/order/:id").all(auth).get(getUserOrders);
 module.exports = router;

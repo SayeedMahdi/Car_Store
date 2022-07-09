@@ -23,12 +23,12 @@ const db = require("./database.js");
 // );`);
 
 //Create table Sales
-// db.query(`CREATE TABLE admin (
-//     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-//     fullName varchar(40),
-//     email varchar(30) UNIQUE,
-//     password varchar(200)
-// );`);
-db.query(`SELECT * FROM admin`,(err,data) =>{
-    console.log(data);
-});
+db.query(`CREATE TABLE admin (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    fullName varchar(40),
+    email varchar(30) UNIQUE,
+    password varchar(200)
+);`);
+// db.query(`SELECT * FROM admin`,(err,data) =>{
+//     console.log(data);
+// });
