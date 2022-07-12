@@ -22,7 +22,7 @@ const signUp = asyncHandler(async (req, res) => {
     await newAdmin.save();
     const findAdmin = await Admin.lastInserted();
     const token = generateToken(findAdmin[0]);
-    res.status(200).json(token);
+    res.status(200).json({...findAdmin[0],token});
 
 });
 
@@ -39,7 +39,7 @@ const signIn = asyncHandler(async (req, res) => {
     throw new Error("password is Invalid!");
   }
   const token = generateToken(findAdmin);
-  res.status(200).json(token);
+  res.status(200).json({...findAdmin[0],token});
 });
 
 const generateToken = (data) => {
