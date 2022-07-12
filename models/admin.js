@@ -18,7 +18,7 @@ class Admin {
       this.password
     ];
     new Promise((resolve, reject) => {
-      db.query(qu, admin, (err,result) => reject(err));
+      db.query(qu, admin);
     });
   }
 

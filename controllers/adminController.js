@@ -5,23 +5,25 @@ const saltRounds = 10;
 var jwt = require("jsonwebtoken");
 
 const signUp = asyncHandler(async (req, res) => {
-  let { fullName, email, password } = req.body;
-  const isExist = await Admin.checkExist(email);
-  if (isExist.length !== 0) {
-    res.status(409);
-    throw new Error("Admin Already Exist!");
-  }
-  password = await bcrypt.hash(password, saltRounds);
-  const admin = {
-    fullName,
-    email,
-    password,
-  };
-  const newAdmin = new Admin(admin);
-  await newAdmin.save();
-  const findAdmin = await Admin.lastInserted();
-  const token = generateToken(findAdmin[0]);
-  res.status(200).json(token);
+    let { fullName, email, password } = req.body;
+    const isExist = await Admin.checkExist(email);
+    if (isExist.length !== 0) {
+      res.status(409);
+      throw new Error("Admin Already Exist!");
+    }
+    password =await bcrypt.hash(password, saltRounds);
+    
+    const admin = {
+      fullName,
+      email,
+      password,
+    };
+    const newAdmin = new Admin(admin);
+    await newAdmin.save();
+    const findAdmin = await Admin.lastInserted();
+    const token = generateToken(findAdmin[0]);
+    res.status(200).json(token);
+
 });
 
 const signIn = asyncHandler(async (req, res) => {
@@ -41,8 +43,8 @@ const signIn = asyncHandler(async (req, res) => {
 });
 
 const generateToken = (data) => {
-  const secret = process.env.secretkey;
-  return jwt.sign({ data: data }, secret, { expiresIn: "1h" });
+    const secret = process.env.secretkey;
+    return jwt.sign({ data: data }, secret, { expiresIn: "1h" });
 };
 const comparePassword = (newPassword, hash) => {
   return bcrypt.compare(newPassword, hash);
