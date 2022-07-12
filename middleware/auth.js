@@ -6,7 +6,6 @@ const key = process.env.secretkey;
 
 const auth = asyncHandler(async (req, res, next) => {
   const token = req.headers.token;
-  console.log(req.headers);
   const { data } = jwt.verify(token, key);
   const { email, password } = data[0];
   const userExist = await admin.checkExist(email);
