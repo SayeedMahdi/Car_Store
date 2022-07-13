@@ -26,7 +26,7 @@ const auth = require("./middleware/auth");
 
 const router = require("express").Router();
 
-router.route("/signup").post(signUp);
+router.route("/signup").all(auth).post(signUp);
 router.route("/signIn").post(signIn);
 
 router.route("/vehicle").all(auth).get(getVehicles).post(createVehicle);

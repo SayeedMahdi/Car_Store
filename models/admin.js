@@ -35,7 +35,6 @@ class Admin {
     const selectQuery = `SELECT * FROM admin WHERE email = ?`;
     return new Promise((resolve, reject) => {
       db.query(selectQuery,email, (err, data) => {
-      
         resolve(data);
       });
     });
