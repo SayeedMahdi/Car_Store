@@ -23,9 +23,10 @@ const db = require("./database.js");
 // );`);
 db.query(`
 CREATE TABLE order(
-    customerId int NOT NULL FOREIGN KEY REFERENCES (PersonID),
-    vehicleId   int Not Null,
-
+    customerId int NOT NULL FOREIGN KEY REFERENCES customers(id),
+    vehicleId   int Not Null FOREIGN KEY REFERENCES vehicles(id),
+    ON DELETE CASCADE,
+    ON UPDATE CASCADE
 )
 `)
 //Create table Sales
