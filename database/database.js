@@ -1,10 +1,9 @@
 // get the client
 const mysql = require("mysql2");
 
-// create the connection to database
 
-const connection = mysql.createConnection({
-    host: "192.168.157.100",
+   const connection = mysql.createConnection({
+    host: "192.168.157.203",
     user: "mahdi",
     database: "mahdi",
     password: "mahdi",
@@ -12,6 +11,14 @@ const connection = mysql.createConnection({
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
-  
+    
 });
+
+connection.connect((err)=>{
+    if(err) console.log(err.message);
+    else{
+        console.log("connected successful");
+    }
+});
+
 module.exports = connection;

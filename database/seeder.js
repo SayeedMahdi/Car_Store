@@ -1,6 +1,6 @@
 const db = require("./database.js");
 
-// //Create table Customers
+//Create table Customers
 // db.query(`
 // CREATE TABLE customers (
 //     id INTEGER PRIMARY KEY  AUTO_INCREMENT,
@@ -11,7 +11,7 @@ const db = require("./database.js");
 //     phone varchar(14)
 // );`);
 
-// //Create table Vehicles
+//Create table Vehicles
 // db.query(`
 // CREATE TABLE vehicles (
 //     id INTEGER PRIMARY KEY  AUTO_INCREMENT,
@@ -21,14 +21,20 @@ const db = require("./database.js");
 //     price int ,
 //     count  int
 // );`);
+db.query(`
+CREATE TABLE order(
+    customerId int NOT NULL FOREIGN KEY REFERENCES (PersonID),
+    vehicleId   int Not Null,
 
+)
+`)
 //Create table Sales
-db.query(`CREATE TABLE admin (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    fullName varchar(40),
-    email varchar(30) UNIQUE,
-    password varchar(200)
-);`);
+// db.query(`CREATE TABLE admin (
+//     id INTEGER PRIMARY KEY AUTO_INCREMENT,
+//     fullName varchar(40),
+//     email varchar(30) UNIQUE,
+//     password varchar(200)
+// );`);
 // db.query(`SELECT * FROM admin`,(err,data) =>{
 //     console.log(data);
 // });
