@@ -30,7 +30,7 @@ const router = require("express").Router();
 router.route("/signup").all(auth).post(signUp);
 router.route("/signIn").post(signIn);
 
-router.route("/vehicle").all(auth).get(getVehicles).post(upload.single("file"),resize, createVehicle);
+router.route("/vehicle").get(getVehicles).post(upload.single("file"),resize, createVehicle);
 router
   .route("/vehicle/:id")
   .all(auth)
