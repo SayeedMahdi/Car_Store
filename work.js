@@ -1,3 +1,3 @@
-let str="some text "
-str[0] ="D"
-console.log(str);
+
+const date = new Date().toLocaleString()
+console.log(date.split(",")[0]);

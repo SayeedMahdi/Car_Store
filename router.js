@@ -20,7 +20,8 @@ const {
   getSales,
   getUserOrders,
 } = require("./controllers/customerVehicle");
-
+const upload = require("./middleware/bufferStorage"); 
+const resize = require("./middleware/resize");
 const { signUp, signIn } = require("./controllers/adminController");
 const auth = require("./middleware/auth");
 
@@ -29,7 +30,7 @@ const router = require("express").Router();
 router.route("/signup").all(auth).post(signUp);
 router.route("/signIn").post(signIn);
 
-router.route("/vehicle").all(auth).get(getVehicles).post(createVehicle);
+router.route("/vehicle").all(auth).get(getVehicles).post(upload.single("file"),resize, createVehicle);
 router
   .route("/vehicle/:id")
   .all(auth)
