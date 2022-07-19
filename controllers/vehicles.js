@@ -18,6 +18,8 @@ const getVehicle = asyncHandler(async (req, res, next) => {
 });
 
 const createVehicle = asyncHandler(async (req, res) => {
+  const image = req;
+  console.log(image);
   const user = new Vehicles(req.body);
   await user.save();
   const lastUser = await Vehicles.lastInserted();

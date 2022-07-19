@@ -1,5 +1,5 @@
 const db = require("./database");
-const query ="DELETE FROM vehicles WHERE id=6";
-db.run(query,(err) =>{
-    console.log(err);
+const query ="describe vehicles";
+db.query(query,(err,result) =>{
+    console.log(result);
 });
