@@ -3,23 +3,22 @@ const imageConfig = require("../config/imageConfig");
 
 const makeResize = async (req, res, next) => {
     const file = req.file;
-    var filePath = [];
+
 
     //make the original size
     imageConfig[0].size = file.size;
     if (!file) { res.status(400).json("file is not exist!");}
 
-  imageConfig.map(async(item) => {
-    const fileName =  Date.now() + "-" +item.type + "." + file.mimetype.split("/")[1];
-    await sharp(req.file.buffer)
-          .resize(item.size)
-          .toFile("upload/" +fileName);
-          console.log(fileName);
-           filePath.push(fileName );
-  });
-
-  console.log(filePath);
-  req.image = filePath;
+ 
+   imageConfig.map(async (item) => {
+     const fileName =  Date.now() + "-" +item.type + "." + file.mimetype.split("/")[1];
+     await sharp(req.file.buffer)
+           .resize(item.size)
+           .toFile("upload/" +fileName);
+           console.log(fileName);
+            req.image.fileName;
+   });
+console.log(req.image);
 
 };
 module.exports = makeResize;
