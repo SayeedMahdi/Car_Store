@@ -7,15 +7,16 @@ class Vehicles extends customFuntions{
       (this.name = options.name),
         (this.manufacturer = options.manufacturer),
         (this.model = options.model),
-        (this.mileage = options.mileage),
-        (this.price = options.price),
-        (this.count = options.count);
+        (this.mileage =parseInt( options.mileage)),
+        (this.price = parseInt(options.price)),
+        (this.count = parseInt(options.count)),
+        (this.imagePaths = options.imagePaths);
     }
   }
 
 
   async save() {
-    const qu = `INSERT INTO  vehicles ( name, manufacturer, model, mileage, price, count ) VALUES (?,?,?,?,?,?)`;
+    const qu = `INSERT INTO  vehicles ( name, manufacturer, model, mileage, price, count, image ) VALUES (?,?,?,?,?,?,?)`;
     const vehicle = [
       this.name,
       this.manufacturer,
@@ -23,11 +24,12 @@ class Vehicles extends customFuntions{
       this.mileage,
       this.price,
       this.count,
+      `${[this.imagePaths]}`
     ];
     new Promise((resolve, reject) => {
       db.query(qu, vehicle, (err) => {
         if (err) {
-          reject(Error(err));
+          reject(err);
         }
       });
     });
