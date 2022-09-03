@@ -18,10 +18,9 @@ const getVehicle = asyncHandler(async (req, res, next) => {
 });
 
 const createVehicle = asyncHandler(async (req, res) => {
-  const image = req.file;
   const user = new Vehicles(req.body);
   await user.save();
-  const lastUser = await Vehicles.lastInserted();
+  const lastUser = await Vehicles.lastInserted("vehicles");
   return res.json(lastUser[0]);
 });
 
